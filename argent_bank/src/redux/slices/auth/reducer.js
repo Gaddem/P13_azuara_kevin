@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import {  } from "./thunk";
+import { postLogin } from "./thunk";
 
 export const initialState = {
-  user: {},
+  user: {
+    username: "",
+    password: "",
+  },
   error: {},
   authSuccess: false,
 };
@@ -12,14 +15,14 @@ const authSlice = createSlice({
   initialState,
   reducer: {},
   extraReducers: (builder) => {
-    // builder.addCase((() => {}).fulfilled, (state, action) => {
-    //   state.authSuccess = true;
-    //   state.user = action.payload.data;
-    // });
-    // builder.addCase((() => {}).rejected, (state, action) => {
-    //   state.authSuccess = false;
-    //   state.error = action.payload || "Erreur lors de la recupération !";
-    // });
+    builder.addCase(postLogin.fulfilled, (state, action) => {
+      state.authSuccess = true;
+      state.user = action.payload.data;
+    });
+    builder.addCase(postLogin.rejected, (state, action) => {
+      state.authSuccess = false;
+      state.error = action.payload || "Erreur lors de la recupération !";
+    });
   },
 });
 
