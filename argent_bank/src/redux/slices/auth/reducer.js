@@ -2,22 +2,26 @@ import { createSlice } from "@reduxjs/toolkit";
 import { postLogin } from "./thunk";
 
 export const initialState = {
-  user: {
-    username: "",
-    password: "",
-  },
+  user: {},
   error: {},
+  loader:false,
   authSuccess: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducer: {},
+  reducers: {
+    // Add reducer to manage loading state
+    setLoading: (state, action) => {
+      state.loader = action.payload;
+    },
+    // other reducers
+  },
   extraReducers: (builder) => {
     builder.addCase(postLogin.fulfilled, (state, action) => {
       state.authSuccess = true;
-      state.user = action.payload.data;
+      state.user = action.payload;
     });
     builder.addCase(postLogin.rejected, (state, action) => {
       state.authSuccess = false;
@@ -26,4 +30,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setLoading } = authSlice.actions;
 export default authSlice.reducer;

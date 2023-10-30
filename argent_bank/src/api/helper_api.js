@@ -7,8 +7,8 @@ axios.defaults.headers.post["Content-Type"] = "application/json";
 
 // intercepting to capture errors
 axios.interceptors.request.use(async (config) => {
-  const token = JSON.parse(sessionStorage.getItem("authUser"))
-    ? JSON.parse(sessionStorage.getItem("authUser")).token
+  const token = JSON.parse(sessionStorage.getItem("user"))
+    ? JSON.parse(sessionStorage.getItem("user")).token
     : null;
   if (token) {
     config.headers.Authorization = "Bearer " + token;

@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "./../img/argentBankLogo.png"; // with import
 import { useDispatch, useSelector } from "react-redux";
+import {  ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { postLogin } from "../redux/slices/thunks";
+import CompLoader from "../component/CompLoader";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
-  // const { user } = useSelector((state) => ({
-  //   user: state.Auth.user,
-  // }));
+  const navigate = useNavigate();
+  const { loader } = useSelector((state) => ({
+    loader: state.Auth.loader,
+  }));
 
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -22,44 +27,57 @@ const LoginScreen = () => {
     });
   };
 
-  const handleLogin = () => {
-              {/* to="/profil" */}
+  const handleLogin = (e) => {
+    e.preventDefault();
+    toast.dismiss();
+    if(formData?.email?.trim()?.length < 1 || formData?.password?.trim()?.length < 1){
+      toast.error("Please enter an username and password", { autoClose: 2000 });
+      return;
+    }
+    dispatch(postLogin(formData)).then(()=>{
+      setFormData({
+        email: "",
+        password: "",
+      });
+      navigate("/profil");
 
-    
-
+      // console.log('user',user)
+    })
   };
 
   return (
     <body>
-      <nav class="main-nav">
-        <Link class="main-nav-logo" to="/">
-          <img class="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
-          <h1 class="sr-only">Argent Bank</h1>
+      <ToastContainer limit={1} />
+
+      <nav className="main-nav">
+        <Link className="main-nav-logo" to="/">
+          <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
+          <h1 className="sr-only">Argent Bank</h1>
         </Link>
         <div>
-          <Link class="main-nav-item" to="/login">
-            <i class="fa fa-user-circle"></i>
+          <Link className="main-nav-item" to="/login">
+            <i className="fa fa-user-circle"></i>
             Sign In
           </Link>
         </div>
       </nav>
-      <main class="main bg-dark">
-        <section class="sign-in-content">
-          <i class="fa fa-user-circle sign-in-icon"></i>
+      <main className="main bg-dark">
+        <section className="sign-in-content">
+          <i className="fa fa-user-circle sign-in-icon"></i>
           <h1>Sign In</h1>
           <form onSubmit={handleLogin}>
-            <div class="input-wrapper">
-              <label for="username">Username</label>
+            <div className="input-wrapper">
+              <label id="email">Username</label>
               <input
                 type="text"
-                id="username"
-                name="username"
-                value={formData.username}
+                id="email"
+                name="email"
+                value={formData.email}
                 onChange={handleInputChange}
               />
             </div>
-            <div class="input-wrapper">
-              <label for="password">Password</label>
+            <div className="input-wrapper">
+              <label id="password">Password</label>
               <input
                 type="password"
                 name="password"
@@ -68,13 +86,15 @@ const LoginScreen = () => {
                 id="password"
               />
             </div>
-            <div class="input-remember">
+            <div className="input-remember">
               <input type="checkbox" id="remember-me" />
-              <label for="remember-me">Remember me</label>
+              <label id="remember-me">Remember me</label>
             </div>
             {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
-            <button type="submit" class="sign-in-button">
-              Sign In
+            <button disabled={loader} type="submit" className="sign-in-button">
+              {!loader ?"Sign In":(
+              <CompLoader />
+              )} 
             </button>
             {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
             {/* <!--  */}
@@ -84,8 +104,8 @@ const LoginScreen = () => {
           </form>
         </section>
       </main>
-      <footer class="footer">
-        <p class="footer-text">Copyright 2020 Argent Bank</p>
+      <footer className="footer">
+        <p className="footer-text">Copyright 2020 Argent Bank</p>
       </footer>
 
       <script></script>
