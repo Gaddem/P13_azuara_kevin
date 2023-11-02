@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "./../img/argentBankLogo.png"; // with import
 import { useDispatch, useSelector } from "react-redux";
-import {  ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postLogin } from "../redux/slices/thunks";
 import CompLoader from "../component/CompLoader";
@@ -10,6 +10,7 @@ import CompLoader from "../component/CompLoader";
 const LoginScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { loader } = useSelector((state) => ({
     loader: state.Auth.loader,
   }));
@@ -34,21 +35,11 @@ const LoginScreen = () => {
       toast.error("Please enter an username and password", { autoClose: 2000 });
       return;
     }
-    dispatch(postLogin(formData)).then(()=>{
-      setFormData({
-        email: "",
-        password: "",
-      });
-      navigate("/profil");
-
-      // console.log('user',user)
-    })
+    dispatch(postLogin({formData,navigate}))
   };
 
   return (
     <body>
-      <ToastContainer limit={1} />
-
       <nav className="main-nav">
         <Link className="main-nav-logo" to="/">
           <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
@@ -98,7 +89,7 @@ const LoginScreen = () => {
             </button>
             {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
             {/* <!--  */}
-            {/* <button class="sign-in-button">Sign In</button>    */}
+            {/* <button className="sign-in-button">Sign In</button>    */}
             {/* -->
           <!--  --> */}
           </form>
