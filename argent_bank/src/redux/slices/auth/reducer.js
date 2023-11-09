@@ -16,6 +16,11 @@ const authSlice = createSlice({
     setLoading: (state, action) => {
       state.loader = action.payload;
     },
+
+    logout: (state) => {
+      state.user = {};
+      sessionStorage.removeItem("user");
+    },
     // other reducers
   },
   extraReducers: (builder) => {
@@ -30,5 +35,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setLoading } = authSlice.actions;
+export const { setLoading,logout } = authSlice.actions;
 export default authSlice.reducer;

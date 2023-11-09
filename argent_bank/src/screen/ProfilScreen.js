@@ -1,26 +1,11 @@
 import React from "react";
-import logo from "./../img/argentBankLogo.png"; // with import
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import CompHeader from "../component/CompHeader";
 
 const ProfilScreen = () => {
   return (
     <body>
-      <nav className="main-nav">
-        <Link className="main-nav-logo" to="/">
-          <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
-          <h1 className="sr-only">Argent Bank</h1>
-        </Link>
-        <div>
-          <Link className="main-nav-item" href="/profil">
-            <i className="fa fa-user-circle"></i>
-            Tony
-          </Link>
-          <Link className="main-nav-item" to="/">
-            <i className="fa fa-sign-out"></i>
-            Sign Out
-          </Link>
-        </div>
-      </nav>
+      <CompHeader />
       <main className="main bg-dark">
         <div className="header">
           <h1>

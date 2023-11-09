@@ -11,36 +11,43 @@ import { useProfile } from "./hooks/useProfile";
 function App() {
   const { token } = useProfile();
 
-  const NOT_AUTH_ROUTES = [
-    { path: "/", component: <MainScreen /> },
-    { path: "/login", component: <LoginScreen /> },
-    { path: "/*", component: <Navigate to="/" /> },
-  ];
-
-  const AUTH_ROUTES = [
-    { path: "/profil", component: <ProfilScreen /> },
-    { path: "/*", component: <Navigate to="/profil" /> },
-  ];
-
   return (
     <Provider store={store}>
       <ToastContainer limit={1} />
       <BrowserRouter>
         <Routes>
           {/*Routes si l'utilisateur n'est pas connecté*/}
-          {!token &&
-            NOT_AUTH_ROUTES.map((route, idx) => (
-              <Route path={route.path} element={route.component} key={idx} />
-            ))}
-          {/*Routes si l'utilisateur est connecté*/}
-          {token &&
-            AUTH_ROUTES.map((route, idx) => (
-              <Route
-                path={route.path}
-                element={<AuthProtected>{route.component}</AuthProtected>}
-                key={idx}
-              />
-            ))}
+          {!token && (
+            <>
+              {/* Route pour la page principale (MainScreen)*/}
+              <Route path="/" element={<MainScreen />} />
+              {/* Route pour la page login (MainScreen)  */}
+              <Route path="/login" element={<LoginScreen />} />
+              {/* Redirection vers le MainScreen pour toutes les autres URL */}
+              <Route path="/*" element={<Navigate to="/" />} />
+            </>
+          )}
+
+          <>
+            {/* Route pour la page de profil accessible seulement si l'utilisateur est connecté */}
+            <Route
+              path="/profil"
+              element={
+                <AuthProtected>
+                  <ProfilScreen />
+                </AuthProtected>
+              }
+            />
+            {/* Redirection vers le ProfilScreen pour toutes les autres URL si l'utilisateur est connecté */}
+            <Route
+              path="/*"
+              element={
+                <AuthProtected>
+                  <Navigate to="/profil" />
+                </AuthProtected>
+              }
+            />
+          </>
         </Routes>
       </BrowserRouter>
     </Provider>
