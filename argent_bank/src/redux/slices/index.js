@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
-import sessionStorage from "redux-persist/es/storage/session";
-import AuthReducer from "./auth/reducer"; // Assurez-vous que le chemin du réducteur est correct
-import { persistCombineReducers } from "redux-persist";
+import AuthReducer from "./auth/reducer"; 
+import ProfilReducer from "./profil/reducer"; 
 
 const appReducer = combineReducers({
   Auth: AuthReducer,
+  Profil: ProfilReducer,
+
   // Ajoutez d'autres réducteurs si nécessaire
 });
 

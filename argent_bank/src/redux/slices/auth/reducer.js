@@ -30,7 +30,7 @@ const authSlice = createSlice({
     });
     builder.addCase(postLogin.rejected, (state, action) => {
       state.authSuccess = false;
-      state.error = action.payload || "Erreur lors de la recupération !";
+      state.error = action.payload || "Error login !";
     });
   },
 });

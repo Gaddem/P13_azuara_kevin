@@ -1,14 +1,16 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginScreen from "./screen/LoginScreen";
-import ProfilScreen from "./screen/ProfilScreen";
+import HomeUserScreen from "./screen/HomeUserScreen";
 import MainScreen from "./screen/MainScreen";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { AuthProtected } from "./api/AuthProtectedConnect";
 import { useProfile } from "./hooks/useProfile";
+import ProfilScreen from "./screen/ProfilScreen";
 
 function App() {
+  
   const { token } = useProfile();
 
   return (
@@ -29,21 +31,30 @@ function App() {
           )}
 
           <>
-            {/* Route pour la page de profil accessible seulement si l'utilisateur est connecté */}
+            {/* Route pour la page de HomeUserScreen accessible seulement si l'utilisateur est connecté */}
+            <Route
+              path="/home"
+              element={
+                <AuthProtected>
+                  <HomeUserScreen/>
+                </AuthProtected>
+              }
+            />
+            {/* Route pour la page de HomeUserScreen accessible seulement si l'utilisateur est connecté */}
             <Route
               path="/profil"
               element={
                 <AuthProtected>
-                  <ProfilScreen />
+                  <ProfilScreen/>
                 </AuthProtected>
               }
             />
-            {/* Redirection vers le ProfilScreen pour toutes les autres URL si l'utilisateur est connecté */}
+            {/* Redirection vers le HomeUserScreen pour toutes les autres URL si l'utilisateur est connecté */}
             <Route
               path="/*"
               element={
                 <AuthProtected>
-                  <Navigate to="/profil" />
+                  <Navigate to="/home" />
                 </AuthProtected>
               }
             />

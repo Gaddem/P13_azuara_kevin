@@ -1,26 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./../css/main.css";
 import chat_img from "./../img/icon-chat.png"; // with import
 import security_img from "./../img/icon-security.png";
 import money_img from "./../img/icon-money.png";
-import logo from "./../img/argentBankLogo.png"; // with import
+import CompHeader from "../component/CompHeader";
 
 const MainScreen = () => {
   return (
     <body>
-      <nav className="main-nav">
-        <Link className="main-nav-logo" to="/">
-          <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
-          <h1 className="sr-only">Argent Bank</h1>
-        </Link>
-        <div>
-          <Link className="main-nav-item" to="/login">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-          </Link>
-        </div>
-      </nav>
+       <CompHeader />
       <main>
         <div className="hero">
           <section className="hero-content">
