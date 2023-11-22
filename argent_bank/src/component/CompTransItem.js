@@ -11,7 +11,7 @@ const CompTransItem = (props) => {
         <p className="account-amount-description">{balanceType}</p>
       </div>
       <div className="account-content-wrapper cta">
-        <button className="transaction-button">View transactions</button>
+        <button disabled={true} className="transaction-button">View transactions</button>
       </div>
     </section>
   );
