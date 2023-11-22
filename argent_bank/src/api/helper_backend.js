@@ -20,4 +20,4 @@ export const postLogin = (data) => api.create(url.LOGIN,data);
 
 // profilUser
 export const getProfil = () => api.create(url.PROFIL);
-export const postProfil = (data) => api.create(url.PROFIL,data);
+export const postProfil = (data) => api.put(url.PROFIL,data);

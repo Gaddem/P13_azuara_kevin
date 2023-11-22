@@ -22,8 +22,7 @@ export const postProfil = createAsyncThunk(
     try {
       console.log("data",data)
       const response = await postProfilApi(data);
-      console.log("response",response)
-
+      toast.success("Profile updated", { autoClose: 2000 });
       return response.body;
     } catch (error) {
       toast.error("Error post profil", { autoClose: 2000 });

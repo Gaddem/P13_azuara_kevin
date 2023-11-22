@@ -26,7 +26,7 @@ const CompHeader = () => {
       <div>
         {!profiler?.loading && profiler?.userProfile?.token ? (
           <>
-            <Link className="main-nav-item">
+            <Link to={"/profil"} className="main-nav-item">
               <i className="fa fa-user-circle"></i>
               {profil?.firstName}
             </Link>
