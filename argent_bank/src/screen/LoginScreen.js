@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getProfil, postLogin } from "../redux/slices/thunks";
 import CompLoader from "../component/CompLoader";
 import CompHeader from "../component/CompHeader";
+import CompFooter from "../component/CompFooter";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -86,9 +87,7 @@ const LoginScreen = () => {
           </form>
         </section>
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <CompFooter/>
 
       <script></script>
     </body>

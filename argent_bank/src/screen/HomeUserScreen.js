@@ -3,6 +3,7 @@ import CompHeader from "../component/CompHeader";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CompTransItem from "../component/CompTransItem";
+import CompFooter from "../component/CompFooter";
 
 const HomeUserScreen = () => {
   const { profil } = useSelector((state) => ({
@@ -45,9 +46,7 @@ const HomeUserScreen = () => {
           balanceType={"Current Balance"}
         />
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <CompFooter/>
     </body>
   );
 };

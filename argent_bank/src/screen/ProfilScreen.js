@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { postProfil } from "../redux/slices/profil/thunk";
+import CompFooter from "../component/CompFooter";
 
 const ProfilScreen = () => {
   const dispatch = useDispatch();
@@ -95,6 +96,7 @@ const ProfilScreen = () => {
           </form>
         </div>
       </main>
+      <CompFooter/>
     </body>
   );
 };

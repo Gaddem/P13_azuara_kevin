@@ -5,6 +5,7 @@ import security_img from "./../img/icon-security.png";
 import money_img from "./../img/icon-money.png";
 import CompHeader from "../component/CompHeader";
 import CompFeatureItem from "../component/CompFeatureItem";
+import CompFooter from "../component/CompFooter";
 
 const MainScreen = () => {
   return (
@@ -50,9 +51,7 @@ const MainScreen = () => {
           />
         </section>
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <CompFooter/>
     </body>
   );
 };
