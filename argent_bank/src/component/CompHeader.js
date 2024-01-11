@@ -15,7 +15,7 @@ const CompHeader = () => {
   
   return (
     <nav className="main-nav">
-      <Link className="main-nav-logo" to="/">
+      <Link className="main-nav-logo" to={profiler?.userProfile?.token?"/home":"/"}>
         <img
           className="main-nav-logo-image"
           src={logo}
