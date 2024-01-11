@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { setAuthorization } from "./helper_api";
 import { useDispatch } from "react-redux";
 import { useProfile } from "../hooks/useProfile";
+import { logout } from "../redux/slices/auth/reducer";
 
 const AuthProtected = (props) => {
   const dispatch = useDispatch();
@@ -11,8 +12,7 @@ const AuthProtected = (props) => {
     if (userProfile && !loading && token) {
       setAuthorization(token);
     } else if (!userProfile && loading && !token) {
-      //   dispatch(logoutUser());
-      //deconnexion
+      dispatch(logout());
     }
   }, [token, userProfile, loading, dispatch]);
 
